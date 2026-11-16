@@ -1,0 +1,158 @@
+{
+  "name": "Office Assistant",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.5,
+      "position": [
+        0,
+        0
+      ],
+      "id": "62bce2bd-4f92-444c-b076-d35d8f3da256",
+      "name": "When chat message received",
+      "webhookId": "b801a2ff-bce7-4afd-bbab-1d659895d536"
+    },
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "You are a friendly office assistant that helps non‑technical colleagues. You can look things up with the Wikipedia tool and do maths with the Calculator tool. Explain things simply, in plain language, without jargon. If a tool fails or you’re not certain, say so honestly instead of guessing."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        224,
+        0
+      ],
+      "id": "a4da92ac-9318-4e04-bd5e-ad59cf5692b3",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-3.8-flash",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1.2,
+      "position": [
+        96,
+        208
+      ],
+      "id": "aa17e83e-58a3-4a15-8b42-bbfc77ffe44f",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "gUEJwHOp8bF4OcR3",
+          "name": "Google Gemini(PaLM) Api account 2"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.4,
+      "position": [
+        208,
+        304
+      ],
+      "id": "93cfd81f-bed1-4ae2-bb25-ff72baf89926",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.toolWikipedia",
+      "typeVersion": 1,
+      "position": [
+        384,
+        208
+      ],
+      "id": "ed06201c-ddae-4e40-bdc2-eea9c3f5de5d",
+      "name": "Wikipedia"
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.toolCalculator",
+      "typeVersion": 1,
+      "position": [
+        480,
+        304
+      ],
+      "id": "829f2d06-1088-4a76-b137-e6784de000fb",
+      "name": "Calculator"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wikipedia": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Calculator": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "7df41b6e-b365-4958-898c-fc23f8e0f79d",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "32d79533d49b73f1e26b1d96d71eecf821a862463c64b427adf06c594ff5a881"
+  },
+  "nodeGroups": [],
+  "id": "Cj2TfWX7SNtTurHr",
+  "tags": []
+}
