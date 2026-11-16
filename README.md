@@ -1,7 +1,7 @@
 # Office Assistant Agent (n8n)
 
 A simple **AI agent built in n8n** that acts as a friendly office assistant: it chats in plain
-language, looks things up with Wikipedia, and does calculations — and it's instructed to be
+language, looks things up with Wikipedia, and does calculations and it's instructed to be
 honest about its limits rather than guess.
 
 I built this to learn hands‑on how AI agents actually work: how an LLM decides *when* to call a
